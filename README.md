@@ -1,5 +1,5 @@
-# docker-arm32v7-iot-edge
-Docker image for running Microsoft IoT Edge runtime on arm32v7 devices like WAGOs PFC200/100.
+# azure-iot-edge
+This repository contains instructions for building and starting a Microsoft Edge Runtime Container on WAGO devices. (e.g. PFC200 G2 or Wago Touch Panel)
 
 # How to setup Azure Iot Edge on Wago Device
 
@@ -12,7 +12,8 @@ Docker image for running Microsoft IoT Edge runtime on arm32v7 devices like WAGO
 
 
 Create an Iot hub and add edge device see: 
-https://docs.microsoft.com/de-de/azure/iot-edge/tutorial-simulate-device-linux
+https://docs.microsoft.com/de-de/azure/iot-edge/quickstart-linux
+
 
 ## PFC Login
 Start SSH Client e.g. Putty 
@@ -36,7 +37,7 @@ docker images # to see all preinstalled images
  mkdir /var/lib/azure-iot-edge
  chmod 777 /var/lib/azure-iot-edge
  ```
-Start azure iot edge runtime container 
+Start azure iot edge runtime container. 
  ```bash
   docker run \
     -it \
@@ -47,7 +48,7 @@ Start azure iot edge runtime container
     -v /var/lib/azure-iot-edge:/var/lib/azure-iot-edge \
     -p 15580:15580 \
     -p 15581:15581 \
-    -e IOT_DEVICE_CONNSTR="$IOT_DEVICE_CONNSTR" \
+    -e IOT_DEVICE_CONNSTR="$MY_DEVICE_CONNSTR" \
     wagoautomation/azure-iot-edge
   bin/bash
   ```
