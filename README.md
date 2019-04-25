@@ -9,13 +9,19 @@ This repository contains instructions for building and starting a Microsoft Edge
   - Firmware you can find here: https://github.com/WAGO/pfc-firmware
   - Docker IPKG you can find here: https://github.com/WAGO/docker-ipk 
 
-
-
-Create an Iot hub and add edge device see: 
+## Microsoft Azure Wold 
+### Create an Iot-Hub, add iot edge device and deviceDeploy your first IoT Edge Module: 
 https://docs.microsoft.com/de-de/azure/iot-edge/quickstart-linux
 
+> Attention: To prevent port "443" clashing of "edgeHub" container and of Wago Webserver, it is absolutely necessary to change the "HostBindings".   You can use any free host ports.
 
-## PFC Login
+<br>
+<div style="text-align: center">
+<img src="images/advanceEdgeSettings.png"
+     alt="AdvanceEdgeSettings"/>
+</div>
+
+## Wago Device Login
 Start SSH Client e.g. Putty 
  ```bash
 login as `root`
@@ -25,40 +31,35 @@ password `wago`
 
 ```bash
 docker info
-docker ps # to see all running container (no container should run)
-docker images # to see all preinstalled images
  ```
-## Setup azure iot Edge
- 
- Create new directories on device for persisting azure iot edge artifacts. (e.g. certificates, deployment)
-  ```bash
- mkdir /etc/azure-iot-edge
- chmod 777 /etc/azure-iot-edge
- mkdir /var/lib/azure-iot-edge
- chmod 777 /var/lib/azure-iot-edge
- ```
-Start azure iot edge runtime container. 
+
+## Start azure iot edge runtime container. 
  ```bash
   docker run \
     -it \
+    --net="host" \
     --name azure-iot-edge-runtime \
     -v //var//run//docker.sock://var//run//docker.sock \
     -v /etc/os-release:/etc/os-release
-    -v /etc/azure-iot-edge:/etc/azure-iot-edge \
-    -v /var/lib/azure-iot-edge:/var/lib/azure-iot-edge \
     -p 15580:15580 \
     -p 15581:15581 \
-    -e IOT_DEVICE_CONNSTR="$MY_DEVICE_CONNSTR" \
+    -e IOT_DEVICE_CONNSTR="$MY_IOT_HUB_DEVICE_CONNSTR" \
+    -e IOT_DEVICE_HOST_IP="$MY_WAGO_DEVICE_IPADDRESS" \
     wagoautomation/azure-iot-edge
   bin/bash
   ```
 
+If the container was started successfully, all deployments defined in Microsoft Azure are automatically downloaded and started. 
+<br>This may take a few minutes.
+<br>With the Docker commands you can track the provisioning process. 
+```bash
+docker images 
+docker ps
+docker logs 
+```
+
 Finally, Wago device is ready for azure iot edge module deployment! <br>
 Happy IoTing!
-
-## Deploy your first IoT Edge Module
-
-https://docs.microsoft.com/de-de/azure/iot-edge/quickstart-linux
 
 ## Azure IoT Edge Modbus Module
 
@@ -72,4 +73,3 @@ https://github.com/Azure/iot-edge-modbus
 
 How to develop your own azure iot edge module see here: 
 https://docs.microsoft.com/en-us/azure/iot-edge/tutorial-csharp-module
-
