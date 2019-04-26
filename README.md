@@ -90,3 +90,47 @@ https://github.com/Azure/iot-edge-modbus
 
 How to develop your own azure iot edge module see here: 
 https://docs.microsoft.com/en-us/azure/iot-edge/tutorial-csharp-module
+<br><br>
+
+## Get prebuild docker azure-iot-edge-runtime image
+https://hub.docker.com/r/wagoautomation/azure-iot-edge
+
+## How to build an docker azure-iot-edge-runtime image
+
+### Build docker azure-iot-edge-runtime image on wago device
+- Clone the GitHub Repository.
+- Copy the folder "build-context" to Wago device. 
+  - (for this you can use WinSCP or any Ftp client) 
+- Start SSH Client e.g. Putty  and login.
+ ```bash
+login as `root`
+password `wago`
+ ```
+- Then change to the directory "build-context".
+- Set executeable flags to iot-edge-starter binary. ( necessary when transferring files from Windows PC )
+```bash
+chmod +x resources/iot-edge-starter
+```
+- Finally execute following docker command. 
+
+```bash
+docker build -t my-azure-iot-edge .
+```
+
+### Build docker azure-iot-edge-runtime image on linux pc
+To build ARM images you need QEMU ARM Emulator installed see (https://www.qemu.org/) 
+The easiest way to get QEMU is :
+```bash
+docker run --rm --privileged multiarch/qemu-user-static:register --reset
+```
+For more information see: https://hub.docker.com/r/multiarch/qemu-user-static/
+
+- Clone the GitHub Repository.
+- Open directory "build-context" with linux terminal.
+- Finally execute following docker command. 
+
+```bash
+docker build -t my-azure-iot-edge .
+```
+
+
