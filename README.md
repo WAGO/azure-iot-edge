@@ -1,6 +1,3 @@
-# azure-iot-edge
-This repository contains instructions for building and starting a Microsoft Edge Runtime Container on WAGO devices. (e.g. PFC200 G2 or Wago Touch Panel)
-
 # How to setup Azure Iot Edge on Wago Device
 
 ## Prerequisites for tutorial
