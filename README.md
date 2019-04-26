@@ -5,15 +5,23 @@ This repository contains instructions for building and starting a Microsoft Edge
 
 ## Prerequisites for tutorial
 - Preinstalled SSH Client (e.g. https://www.putty.org/)
-- Microsoft Azure Account 
+- Wago Device e.g. PFC200 G2 or Wago Touch Panel with minimal Firmware 12
   - Firmware you can find here: https://github.com/WAGO/pfc-firmware
-  - Docker IPKG you can find here: https://github.com/WAGO/docker-ipk 
+  - Docker IPKG you can find here: https://github.com/WAGO/docker-ipk
+- Microsoft Azure Account 
+ 
 
-## Microsoft Azure Wold 
-### Create an Iot-Hub, add iot edge device and deviceDeploy your first IoT Edge Module: 
+## Create an Iot-Hub, add iot edge device and deviceDeploy your first IoT Edge Module: 
 https://docs.microsoft.com/de-de/azure/iot-edge/quickstart-linux
 
-> Attention: To prevent port "443" clashing of "edgeHub" container and of Wago Webserver, it is absolutely necessary to change the "HostBindings".   You can use any free host ports.
+Please go through the following points:
+- Create an IoT Hub.
+- Register an IoT Edge device to your IoT hub.
+- The section <span style="color:yellow;"> <strong>"Configure your IoT Edge device" </strong></span> can be completely ignored.
+- Remotely deploy a SimulatedTemperatureSensor module to an IoT Edge device.
+
+
+> <span style="color:red;"> Attention: </span> To prevent port <strong>"443"</strong> clashing of <strong>"edgeHub"</strong> container and of Wago Webserver, it is absolutely necessary to change the <strong>"HostBindings"</strong>.   You can use any free host ports.
 
 <br>
 <div style="text-align: center">
@@ -40,16 +48,13 @@ docker info
     --net="host" \
     --name azure-iot-edge-runtime \
     -v //var//run//docker.sock://var//run//docker.sock \
-    -v /etc/os-release:/etc/os-release
-    -p 15580:15580 \
-    -p 15581:15581 \
-    -e IOT_DEVICE_CONNSTR="$MY_IOT_HUB_DEVICE_CONNSTR" \
-    -e IOT_DEVICE_HOST_IP="$MY_WAGO_DEVICE_IPADDRESS" \
+    -v /etc/os-release:/etc/os-release \
+    -e IOT_DEVICE_CONNSTR="MY_IOT_HUB_DEVICE_CONNSTR" \
+    -e IOT_DEVICE_HOST_IP="MY_WAGO_DEVICE_IPADDRESS" \
     wagoautomation/azure-iot-edge
-  bin/bash
   ```
 
-If the container was started successfully, all deployments defined in Microsoft Azure are automatically downloaded and started. 
+After the container start, all deployments defined in Microsoft Azure are automatically downloaded and started. 
 <br>This may take a few minutes.
 <br>With the Docker commands you can track the provisioning process. 
 ```bash
@@ -58,6 +63,21 @@ docker ps
 docker logs 
 ```
 
+After all containers have been started, the following Docker command should return the following:
+```bash
+docker ps --format "table {{.Image}}\t {{.Status}}\t{{.Names}}"
+```
+
+<br>
+<div style="text-align: center">
+<img src="images/docker_ps_format.png"
+     alt="AdvanceEdgeSettings"/>
+</div>
+
+
+The <strong>"SimulatedTemperatureSensor"</strong> module sends <strong>"500"</strong> simulation messages to your Iot Hub. The telemetry data can be displayed e.g. with a Visual Studio Code extension. (see: https://marketplace.visualstudio.com/items?itemName=vsciot-vscode.azure-iot-toolkit)
+
+<br><br>
 Finally, Wago device is ready for azure iot edge module deployment! <br>
 Happy IoTing!
 
