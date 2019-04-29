@@ -1,8 +1,8 @@
 #FROM arm32v7/ubuntu:16.04 as base
 FROM arm32v7/debian:stretch-slim as base
 
-MAINTAINER Wago <dirk.meihoefer@wago.com>
-MAINTAINER Wago <sergei.ikkert@wago.com>
+LABEL maintainer = Wago <dirk.meihoefer@wago.com>
+LABEL maintainer = Wago <sergei.ikkert@wago.com>
 
 COPY resources / 
 
