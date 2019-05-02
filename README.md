@@ -1,3 +1,11 @@
+[![dockeri.co](https://dockeri.co/image/wagoautomation/azure-iot-edge)](https://hub.docker.com/r/wagoautomation/azure-iot-edge)
+[![Build Status](https://img.shields.io/docker/cloud/build/wagoautomation/azure-iot-edge.svg "DockerHub Build")](https://hub.docker.com/r/wagoautomation/azure-iot-edge)
+
+[![GitHub issues](https://img.shields.io/github/issues/WAGO/azure-iot-edge.svg "GitHub issues")](https://github.com/WAGO/azure-iot-edge/issues)
+[![GitHub stars](https://img.shields.io/github/stars/WAGO/azure-iot-edge.svg "GitHub stars")](https://github.com/WAGO/azure-iot-edge/stargazers)
+
+
+
 # How to setup Azure Iot Edge on Wago Device
 
 ## Prerequisites for tutorial
