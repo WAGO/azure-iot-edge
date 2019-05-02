@@ -1,8 +1,8 @@
 ## Statistics Docker Hub
 
-[![DockerHub stars](https://img.shields.io/docker/stars/wagoautomation/azure-iot-edge.svg?flat&logo=docker "Docker Hub Stars")](https://hub.docker.com/r/wagoautomation/azure-iot-edge)
-[![DockerHub pulls](https://img.shields.io/docker/pulls/wagoautomation/azure-iot-edge.svg?flat&logo=docker "Docker Hub Pulls")](https://hub.docker.com/r/wagoautomation/azure-iot-edge)
-[![DockerHub build-status](https://img.shields.io/docker/cloud/build/wagoautomation/azure-iot-edge.svg?flat&logo=docker "Docker Hub Build")](https://hub.docker.com/r/wagoautomation/azure-iot-edge/builds)
+[![DockerHub stars](https://img.shields.io/docker/stars/wagoautomation/azure-iot-edge.svg?flat&logo=docker "DockerHub stars")](https://hub.docker.com/r/wagoautomation/azure-iot-edge)
+[![DockerHub pulls](https://img.shields.io/docker/pulls/wagoautomation/azure-iot-edge.svg?flat&logo=docker "DockerHub pulls")](https://hub.docker.com/r/wagoautomation/azure-iot-edge)
+[![DockerHub build-status](https://img.shields.io/docker/cloud/build/wagoautomation/azure-iot-edge.svg?flat&logo=docker "DockerHub build-status")](https://hub.docker.com/r/wagoautomation/azure-iot-edge/builds)
 
 ## Statistics Git Hub
 [![GitHub issues](https://img.shields.io/github/issues/WAGO/azure-iot-edge.svg?flat&logo=github "GitHub issues")](https://github.com/WAGO/azure-iot-edge/issues)
