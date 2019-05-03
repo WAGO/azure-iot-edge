@@ -32,7 +32,7 @@ Please go through the following points:
 
 <br>
 <div style="text-align: center">
-<img src="images/advanceEdgeSettings.png"
+<img src="https://github.com/WAGO/azure-iot-edge/blob/master/images/advanceEdgeSettings.png"
      alt="AdvanceEdgeSettings"/>
 </div>
 
@@ -77,7 +77,7 @@ docker ps --format "table {{.Image}}\t {{.Status}}\t{{.Names}}"
 
 <br>
 <div style="text-align: center">
-<img src="images/docker_ps_format.png"
+<img src="https://github.com/WAGO/azure-iot-edge/blob/master/images/docker_ps_format.png"
      alt="AdvanceEdgeSettings"/>
 </div>
 
