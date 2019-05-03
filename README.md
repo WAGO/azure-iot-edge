@@ -78,7 +78,7 @@ docker ps --format "table {{.Image}}\t {{.Status}}\t{{.Names}}"
 <br>
 <div style="text-align: center">
 <img src="https://github.com/WAGO/azure-iot-edge/blob/master/images/docker_ps_format.png"
-     alt="AdvanceEdgeSettings"/>
+     alt="docker_ps_format"/>
 </div>
 
 
