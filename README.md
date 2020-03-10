@@ -16,7 +16,10 @@
   - Firmware you can find here: https://github.com/WAGO/pfc-firmware
   - Docker IPKG you can find here: https://github.com/WAGO/docker-ipk
 - Microsoft Azure Account 
- 
+
+
+## Video Tutorial on Youtube (Azure IoT Edge & Modbus Module deployment)
+https://youtu.be/rZ8kpsomBIU 
 
 ## Create an Iot-Hub, add iot edge device and deviceDeploy your first IoT Edge Module: 
 https://docs.microsoft.com/de-de/azure/iot-edge/quickstart-linux
@@ -28,7 +31,7 @@ Please go through the following points:
 - Remotely deploy a SimulatedTemperatureSensor module to an IoT Edge device.
 
 
-> <span style="color:red;"> Attention: </span> To prevent port <strong>"443"</strong> clashing of <strong>"edgeHub"</strong> container and of Wago Webserver, it is absolutely necessary to change the <strong>"HostBindings"</strong>.   You can use any free host ports.
+> <span style="color:red;"> <strong>Attention:</strong> </span> To prevent port <strong>"443"</strong> clashing of <strong>"edgeHub"</strong> container and of Wago Webserver, it is absolutely necessary to change the <strong>"HostBindings"</strong>.   You can use any free host ports.
 
 <br>
 <div style="text-align: center">
