@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 if [ "$1" = "init" ]; then
@@ -15,13 +14,13 @@ else
   | sed ':a;N;$!ba;s/\n/@/g' \
   | sed 's/\s//g' \
   | grep -Po '((?<=@network:@name:")[^"]*|(?<=@network:")[^"]*)')
+  [ -z "$network" ] && network="azure-iot-edge"
   echo $network
   echo $HOSTNAME
   docker network create $network
-  docker network connect ${network} ${HOSTNAME}
+  docker network connect $network $HOSTNAME
   export HOST_IP=$(ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
   cat /config/config.yaml | envsubst > /etc/iotedge/config.yaml
   exec iotedged -c /etc/iotedge/config.yaml
 fi
-
 
