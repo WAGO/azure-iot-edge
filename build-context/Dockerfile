@@ -1,4 +1,5 @@
-FROM ubuntu:bionic as base
+FROM debian:stretch-slim as base
+ARG IOTEDGE_VERSION=1.0.10-1
 
 RUN apt-get update \
     && apt-get upgrade -y \
@@ -18,7 +19,7 @@ RUN cp ./microsoft.gpg /etc/apt/trusted.gpg.d/
 
 RUN apt-get update
 RUN apt-get install -y moby-engine
-RUN apt-get install -y iotedge
+RUN apt-get install -y iotedge=${IOTEDGE_VERSION}
 RUN apt-get remove -y moby-engine
 
 RUN cp -r /etc/iotedge/ /etc/iotedge.copy/
@@ -30,6 +31,7 @@ RUN chmod +x /docker-entrypoint.sh
 FROM scratch as final
 LABEL maintainer = Wago <dirk.meihoefer@wago.com>
 LABEL maintainer = Wago <sergei.ikkert@wago.com>
+LABEL description="Azure IOT Edge version ${IOTEDGE_VERSION}"
 COPY --from=base / /
 WORKDIR /
 ENTRYPOINT ["/bin/bash", "/docker-entrypoint.sh"]
