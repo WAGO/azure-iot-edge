@@ -1,4 +1,4 @@
-FROM debian:stretch-slim as base
+FROM ubuntu:bionic as base
 ARG IOTEDGE_VERSION=1.0.10-1
 
 RUN apt-get update \
