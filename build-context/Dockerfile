@@ -1,5 +1,6 @@
-FROM ubuntu:bionic as base
 ARG IOTEDGE_VERSION=1.0.10-1
+FROM ubuntu:bionic as base
+ARG IOTEDGE_VERSION
 
 RUN apt-get update \
     && apt-get upgrade -y \
@@ -29,9 +30,9 @@ RUN chmod +x /docker-entrypoint.sh
 
 
 FROM scratch as final
-LABEL maintainer = Wago <dirk.meihoefer@wago.com>
-LABEL maintainer = Wago <sergei.ikkert@wago.com>
-LABEL description="Azure IOT Edge version ${IOTEDGE_VERSION}"
+ARG IOTEDGE_VERSION
+LABEL maintainer = "Wago <dirk.meihoefer@wago.com>", "Wago <sergei.ikkert@wago.com>"
+LABEL description  = "Azure IOT Edge version ${IOTEDGE_VERSION}"
 COPY --from=base / /
 WORKDIR /
 ENTRYPOINT ["/bin/bash", "/docker-entrypoint.sh"]
