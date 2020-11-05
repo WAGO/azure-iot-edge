@@ -23,7 +23,6 @@ RUN apt-get install -y moby-engine
 RUN apt-get install -y iotedge=${IOTEDGE_VERSION}
 RUN apt-get remove -y moby-engine
 
-RUN cp -r /etc/iotedge/ /etc/iotedge.copy/
 RUN apt-get clean && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
 COPY docker-entrypoint.sh / 
 RUN chmod +x /docker-entrypoint.sh

@@ -1,13 +1,13 @@
 #!/bin/bash
 
 if [ "$1" = "init" ]; then
-  cat /etc/iotedge.copy/config.yaml.template \
+  cat /etc/iotedge/config.yaml.template \
   | sed 's;  uri: "unix:///var/run/docker.sock";  docker_uri: "/var/run/docker.sock";g' \
   | sed 's/management_uri:\s*"[^"]*"/management_uri: "http:\/\/\$HOST_IP:15580"/g' \
   | sed 's/workload_uri:\s*"[^"]*"/workload_uri: "http:\/\/\$HOST_IP:15581"/g' \
-  | sed 's/hostname:\s*"[^"]*"/hostname: "$HOSTNAME"/g' > /etc/iotedge/config.yaml.template
+  | sed 's/hostname:\s*"[^"]*"/hostname: "$HOSTNAME"/g' > /config/config.yaml.template
 
-  [ ! -f "/config/config.yaml"  ] && cp /etc/iotedge/config.yaml.template /config/config.yaml
+  [ ! -f "/config/config.yaml"  ] && cp /config/config.yaml.template /config/config.yaml
   chmod 444 /config/*
 else
   network=$(cat /config/config.yaml \
