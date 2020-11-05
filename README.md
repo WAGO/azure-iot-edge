@@ -60,7 +60,7 @@ For more details see: https://docs.microsoft.com/en-us/azure/iot-edge/how-to-man
 
  ```bash
   docker run -d --name azure-iot-edge-runtime \
-    -v //var//run//docker.sock://var//run//docker.sock \
+    -v /var/run/docker.sock:/var/run/docker.sock \
     -v /config:/config \
     wagoautomation/azure-iot-edge
   ```
