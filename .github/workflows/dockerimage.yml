@@ -2,6 +2,8 @@ name: Docker Image CI
 
 on:
   push:
+    branches:
+      - main
 env:
   IOTEDGE_VERSION: 1.0.10-1
 
