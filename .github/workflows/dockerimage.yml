@@ -1,15 +1,12 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - build-context
-      - .github/workflows/dockerimage.yml
-
-env:
-  IOTEDGE_VERSION: 1.0.10-1
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Azure IOT Edge Version"
+        required: true
+        default: "1.1.0-1"
 
 jobs:
   build:
@@ -28,13 +25,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v2.3.0
         with:
           context: ./build-context
           file: ./build-context/Dockerfile
           platforms: linux/amd64,linux/arm/v7
-          build-args: IOTEDGE_VERSION=${{ env.IOTEDGE_VERSION }}
+          build-args: |
+            IOTEDGE_VERSION=${{ github.event.inputs.version }}
           push: true
           tags: |
-            wagoautomation/azure-iot-edge:${{ env.IOTEDGE_VERSION }}
+            wagoautomation/azure-iot-edge:${{ github.event.inputs.version }}
             wagoautomation/azure-iot-edge:latest
