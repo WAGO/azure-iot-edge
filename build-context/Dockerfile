@@ -1,33 +1,41 @@
-ARG IOTEDGE_VERSION=1.0.10-1
+ARG IOTEDGE_VERSION=1.1.0-1
 FROM ubuntu:bionic as base
 ARG IOTEDGE_VERSION
 
-RUN apt-get update \
-    && apt-get upgrade -y \
-    && apt-get autoremove -y \
-    && apt-get install -y \
-    curl \
-    gettext-base \
-    iproute2 \
-    gnupg2
+# update and install required packages
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get autoremove -y && \
+    apt-get install -y \
+        curl \
+        gettext-base \
+        iproute2 \
+        gnupg2
 
-RUN curl https://packages.microsoft.com/config/debian/stretch/multiarch/prod.list > ./microsoft-prod-arm.list
-RUN cp ./microsoft-prod-arm.list /etc/apt/sources.list.d/
-RUN curl https://packages.microsoft.com/config/ubuntu/18.04/multiarch/prod.list > ./microsoft-prod.list
-RUN cp ./microsoft-prod.list /etc/apt/sources.list.d/
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-RUN cp ./microsoft.gpg /etc/apt/trusted.gpg.d/
+# add custom repository
+RUN curl https://packages.microsoft.com/config/debian/stretch/multiarch/prod.list > ./microsoft-prod-arm.list && \
+    cp ./microsoft-prod-arm.list /etc/apt/sources.list.d/ && \
+    curl https://packages.microsoft.com/config/ubuntu/18.04/multiarch/prod.list > ./microsoft-prod.list && \
+    cp ./microsoft-prod.list /etc/apt/sources.list.d/ && \
+    curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg && \
+    cp ./microsoft.gpg /etc/apt/trusted.gpg.d/
 
-RUN apt-get update
-RUN apt-get install -y moby-engine
-RUN apt-get install -y iotedge=${IOTEDGE_VERSION}
-RUN apt-get remove -y moby-engine
+# install IoT Edge (create a docker group to prevent "no container runtime detected" error)
+RUN groupadd docker --force && \
+    apt-get update -y && \
+    apt-get install -y \
+        moby-cli \
+        iotedge=${IOTEDGE_VERSION} && \
+    apt-get remove -y moby-cli
 
-RUN apt-get clean && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# cleanup
+RUN apt-get -y autoremove && \
+    apt-get clean && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 COPY docker-entrypoint.sh / 
 RUN chmod +x /docker-entrypoint.sh
 
-
+# second stage in docker build process to reduce image size
 FROM scratch as final
 ARG IOTEDGE_VERSION
 LABEL maintainer = "Wago <dirk.meihoefer@wago.com>", "Wago <sergei.ikkert@wago.com>"
