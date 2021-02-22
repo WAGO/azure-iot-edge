@@ -36,8 +36,7 @@ Navigate to Azure Portal-> Your Edge Device-> Set modules on device->Runtime Set
 
 <br>
 <div style="text-align: center">
-<img src="https://github.com/WAGO/azure-iot-edge/blob/main/images/advanceEdgeSettings.png?raw=true"
-     alt="AdvanceEdgeSettings"/>
+<img src="images/advanceEdgeSettings.png?raw=true" alt="AdvanceEdgeSettings"/>
 </div>
 
 
@@ -61,7 +60,8 @@ For more details see: https://docs.microsoft.com/en-us/azure/iot-edge/how-to-man
  ```bash
   docker run -d --name azure-iot-edge-runtime \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /config:/config \
+    -v /usr/bin/docker:/usr/bin/docker \
+    -v /config/:/config/:ro \
     wagoautomation/azure-iot-edge
   ```
 
@@ -81,8 +81,7 @@ docker ps --format "table {{.Image}}\t {{.Status}}\t{{.Names}}"
 
 <br>
 <div style="text-align: center">
-<img src="https://github.com/WAGO/azure-iot-edge/blob/main/images/docker_ps_format.png?raw=true"
-     alt="docker_ps_format"/>
+<img src="images/docker_ps_format.png?raw=true" alt="docker_ps_format"/>
 </div>
 
 
