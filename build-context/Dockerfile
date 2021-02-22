@@ -7,10 +7,10 @@ RUN apt-get update -y && \
     apt-get upgrade -y && \
     apt-get autoremove -y && \
     apt-get install -y \
-        curl \
-        gettext-base \
-        iproute2 \
-        gnupg2
+    curl \
+    gettext-base \
+    iproute2 \
+    gnupg2
 
 # add custom repository
 RUN curl https://packages.microsoft.com/config/debian/stretch/multiarch/prod.list > ./microsoft-prod-arm.list && \
@@ -24,9 +24,8 @@ RUN curl https://packages.microsoft.com/config/debian/stretch/multiarch/prod.lis
 RUN groupadd docker --force && \
     apt-get update -y && \
     apt-get install -y \
-        moby-cli \
-        iotedge=${IOTEDGE_VERSION} && \
-    apt-get remove -y moby-cli
+    moby-cli \
+    iotedge=${IOTEDGE_VERSION} 
 
 # cleanup
 RUN apt-get -y autoremove && \
