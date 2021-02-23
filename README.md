@@ -2,7 +2,6 @@
 
 [![DockerHub stars](https://img.shields.io/docker/stars/wagoautomation/azure-iot-edge.svg?flat&logo=docker "DockerHub stars")](https://hub.docker.com/r/wagoautomation/azure-iot-edge)
 [![DockerHub pulls](https://img.shields.io/docker/pulls/wagoautomation/azure-iot-edge.svg?flat&logo=docker "DockerHub pulls")](https://hub.docker.com/r/wagoautomation/azure-iot-edge)
-[![DockerHub build-status](https://img.shields.io/docker/cloud/build/wagoautomation/azure-iot-edge.svg?flat&logo=docker "DockerHub build-status")](https://hub.docker.com/r/wagoautomation/azure-iot-edge/builds)
 
 ## Statistics Git Hub
 [![GitHub issues](https://img.shields.io/github/issues/WAGO/azure-iot-edge.svg?flat&logo=github "GitHub issues")](https://github.com/WAGO/azure-iot-edge/issues)
@@ -60,9 +59,10 @@ For more details see: https://docs.microsoft.com/en-us/azure/iot-edge/how-to-man
 
  ```bash
   docker run -d --name azure-iot-edge-runtime \
+    --restart=unless-stopped \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /usr/bin/docker:/usr/bin/docker \
-    -v /usr/bin/com.docker.cli:/usr/bin/com.docker.cli \
+    -v /etc/docker:/etc/docker \
     -v /config:/config:ro \
     wagoautomation/azure-iot-edge
   ```
