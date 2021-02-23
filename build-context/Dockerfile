@@ -25,7 +25,10 @@ RUN groupadd docker --force && \
     apt-get update -y && \
     apt-get install -y \
     moby-cli \
-    iotedge=${IOTEDGE_VERSION} 
+    libiothsm-std=${IOTEDGE_VERSION} \    
+    iotedge=${IOTEDGE_VERSION}    
+
+RUN apt-get remove -y moby-cli
 
 # cleanup
 RUN apt-get -y autoremove && \
