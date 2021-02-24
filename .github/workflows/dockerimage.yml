@@ -36,3 +36,10 @@ jobs:
           tags: |
             wagoautomation/azure-iot-edge:${{ github.event.inputs.version }}
             wagoautomation/azure-iot-edge:latest
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1.1.3
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: WAGO/corporate-azure-iot-edge
+          event-type: azure-iot-edge-build
+          client-payload: '{"message": {"version": "${{ github.event.inputs.version }}"}}'
