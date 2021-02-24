@@ -10,7 +10,8 @@ RUN apt-get update -y && \
     curl \
     gettext-base \
     iproute2 \
-    gnupg2
+    gnupg2 \
+    jq 
 
 # add custom repository
 RUN curl https://packages.microsoft.com/config/debian/stretch/multiarch/prod.list > ./microsoft-prod-arm.list && \
