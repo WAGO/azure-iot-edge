@@ -17,8 +17,8 @@ else
   [ -z "$network" ] && network="azure-iot-edge"
   echo $network
   echo $HOSTNAME
-  docker network create $network
-  docker network connect $network $HOSTNAME
+  docker network create $network 2>/dev/null
+  docker network connect $network $HOSTNAME 2>/dev/null
   export HOST_IP=$(eval $(echo "docker inspect $HOSTNAME | jq --raw-output '.[].NetworkSettings.Networks."'"'$network'"'".IPAddress'"))
   cat /config/config.yaml | envsubst > /etc/iotedge/config.yaml
   exec iotedged -c /etc/iotedge/config.yaml
