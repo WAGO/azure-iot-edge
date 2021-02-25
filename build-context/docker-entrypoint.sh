@@ -19,7 +19,7 @@ else
   echo $HOSTNAME
   docker network create $network
   docker network connect $network $HOSTNAME
-  export HOST_IP=eval $(echo "docker inspect $HOSTNAME | jq --raw-output '.[].NetworkSettings.Networks."'"'$network'"'".IPAddress'")
+  export HOST_IP=$(eval $(echo "docker inspect $HOSTNAME | jq --raw-output '.[].NetworkSettings.Networks."'"'$network'"'".IPAddress'"))
   cat /config/config.yaml | envsubst > /etc/iotedge/config.yaml
   exec iotedged -c /etc/iotedge/config.yaml
 fi
