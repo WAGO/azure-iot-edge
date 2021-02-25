@@ -70,7 +70,7 @@ For more details see: https://docs.microsoft.com/en-us/azure/iot-edge/how-to-man
 >```
 >with  
 >```bash
->-v /usr/bin/com.docker.cli:/usr/bin/com.docker.cli
+>-v /usr/bin/com.docker.cli:/usr/bin/docker
 >```
 
 After the container start, all deployments defined in Microsoft Azure are automatically downloaded and started. 
